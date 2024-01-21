@@ -17,13 +17,16 @@ class ExtendedKalmanFilter:
         self.C = np.identity(3)
         
         # State transition error
-        self.R = np.identity(3) * 0.0001
+        self.R = np.identity(3)
+        self.R[0,0] = ??
+        self.R[1,1] = ??
+        self.R[2,2] = ??
         
         # Measurement error
         self.Q = np.identity(3)
-        self.Q[0,0] = 1
-        self.Q[1,1] = 1
-        self.Q[2,2] = 10
+        self.Q[0,0] = ??
+        self.Q[1,1] = ??
+        self.Q[2,2] = ??
         print("Initialize Extended Kalman Filter")
     
     def set_initial_pose(self, x, y, yaw):
@@ -40,15 +43,15 @@ class ExtendedKalmanFilter:
         yaw = self.pose[2]
 
         # calculate the nonlinear transition matrix
-        self.B[0,0] = cos(yaw); self.B[0,1] = -sin(yaw); self.B[0,2] = 0
-        self.B[1,0] = sin(yaw); self.B[1,1] = cos(yaw); self.B[1,2] = 0
-        self.B[2,0] = 0; self.B[2,1] = 0; self.B[2,2] = 1
+        self.B[0,0] = ??; self.B[0,1] = ??; self.B[0,2] = ??
+        self.B[1,0] = ??; self.B[1,1] = ??; self.B[1,2] = ??
+        self.B[2,0] = ??; self.B[2,1] = ??; self.B[2,2] = ??
 
         # calculate the Jacobian in EKF line-2
         G = np.identity(3)
-        G[0,0] = 1; G[0,1] = 0; G[0,2] = -u[0]*sin(yaw) - u[1]*cos(yaw)
-        G[1,0] = 0; G[1,1] = 1; G[1,2] = u[0]*cos(yaw) - u[1]*sin(yaw)
-        G[2,0] = 0; G[2,1] = 0; G[2,2] = 1
+        G[0,0] = ??; G[0,1] = ??; G[0,2] = ??
+        G[1,0] = ??; G[1,1] = ??; G[1,2] = ??
+        G[2,0] = ??; G[2,1] = ??; G[2,2] = ??
 
         # formula of EKF in prediction stage
         self.pose = self.A.dot(self.pose) + np.matmul(self.B, u)
