@@ -1,0 +1,20 @@
+<launch>
+    <param name="use_sim_time" value="true" /> 
+
+    <!-- use rviz to visualize -->
+    <node pkg="rviz"    type="rviz" name="rviz" args="-d $(find fusion)/rviz_config/rviz_config.rviz"/>
+
+    <!-- main program -->
+    <node pkg ="fusion" type="fusion.py" name="EKF_fusion" output="screen"/>
+
+
+    <!-- play the data -->
+    <arg name="data_path" default="$(find fusion)/data/data.bag"/>
+    <node pkg="rosbag" type="play" name="bag_player" required="true" output="screen"
+        args="
+        --clock
+        --pause
+        -r 1.0
+        --bags $(arg data_path)
+    "/>
+</launch>
