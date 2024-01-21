@@ -7,19 +7,25 @@ class ExtendedKalmanFilter:
         self.pose = np.zeros(3)
         
         # Transition matrix
+        # self.A = ???
+        # self.B = ???
         self.A = np.identity(3)
         self.B = np.identity(3)
         
         # State covariance matrix
+        # self.S = ???
         self.S = np.identity(3) * 1
         
         # Observation matrix
+        # self.C = ???
         self.C = np.identity(3)
         
         # State transition error
+        # self.R = ???
         self.R = np.identity(3) * 0.0001
         
         # Measurement error
+        # self.Q = ???
         self.Q = np.identity(3)
         self.Q[0,0] = 1
         self.Q[1,1] = 1
@@ -32,9 +38,11 @@ class ExtendedKalmanFilter:
         self.pose[2] = yaw
         
 
+    #TODO ???
     def predict(self, u):
         # Implement a linear or nonlinear motion model for the control input
         # Calculate Jacobian matrix of the model
+
         yaw = self.pose[2]
 
         # calculate the nonlinear transition matrix
