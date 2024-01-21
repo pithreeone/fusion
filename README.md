@@ -5,7 +5,7 @@
 
 Please refer to [Enviroment Setup](https://hackmd.io/iEpGB4jXRIqkL8kOykUC3A#Enviroment-Setup)
 
-## Part 2 : Application of EKF
+## Part 2 : Implement EKF Algorithm
 ### Introduction
 In the localization task, **Extended Kalman filter** is a tool to fuse information from different sensors. In this project, we use **radar odometry** and **GPS** with covariance. Radar odometry provides position and heading overtime, which is obtained from radar sensor. GPS provides position overtime. Noted that the frequency of sensors are different.
 
@@ -28,10 +28,12 @@ Your task is to create a customized motion model and observation matrix in the E
 **/gt_odom** is the ground truth, can only be used to verify your result
 
 ### Package
-Please download template files and data from the [**link**](https://github.com/pithreeone/fusion/tree/student)
+Please download the data from the [**link**](https://drive.google.com/drive/folders/1_Z6AUrWdgF_LvK_2a47P-OtPwOcWkYTv).
 The directory structure in container should be as follow : 
 ```
 ~/catkin_ws
+├── build
+├── devel
 ├── src/fusion
 │   ├── launch/EKF_fusion.launch
 │   ├── rviz_config/rviz_config.rviz
@@ -44,7 +46,7 @@ The directory structure in container should be as follow :
 ```
 `fusion.py` and `kalman_filter.py` are provided as template files for your work. The question marks in the files serve as hints, offering guidance on potential modifications.
 
-To run the code:
+## Part 3 :  How To run the code?
 1. Enter the docker container
 2. In terminal `cd ~/catkin_ws`
 3. `roslaunch fusion EKF_fusion.launch `
@@ -54,7 +56,7 @@ To run the code:
 ### Result
 ![Alt text](result.png)
 
-### Discussion
+## Part 4 :  Discussion
 1. How do you design the EKF (motion model, observation matrix, states, etc.)?
 2. What is the covariance matrix of **GPS**, **radar odometry** and what does it mean?
 
