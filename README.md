@@ -2,8 +2,28 @@
 
 ## Part 1 : Setup
 ### Enviroment Setup
+__Clone a pre-build image from Docker Hub__  
+```
+docker pull pithreeone/winter_project
+```
 
-Please refer to [Enviroment Setup](https://hackmd.io/iEpGB4jXRIqkL8kOykUC3A#Enviroment-Setup)
+__Create a new container from an image__  
+  
+```
+xhost +
+
+sudo docker run -it \
+--env="DISPLAY" \
+--env="QT_X11_NO_MITSHM=1" \
+--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+-p 2233:22 \
+--name winter_project \
+--user root \
+-e GRANT_SUDO=yes \
+pithreeone/winter_project \
+bash
+```
+
 
 ## Part 2 : Implement EKF Algorithm
 ### Introduction
@@ -17,18 +37,17 @@ Your task is to create a customized motion model and observation matrix in the E
 * Topic 
   - /clock-------------------(rosgraph_msg/Clock)
   - /gps---------------------(geometry_msg/PoseWithCovarinceStamped)------Simulated GPS(~1Hz)
-  - /gt_odom-------------(nav_msgs/Odometry)-------------------------------------Ground truth odometry
-  - /imu---------------------(sensor_msgs/Imu)------------------------------------------------------------------------IMU
-  - /nuscenes_lidar-----(sensor_msgs/PointCloud2)---------------------------------------Lidar pointcloud
-  - /radar_odometry---(nav_msgs/Odometry)--------------------------Odometry calculated by radar
-  - /tf-------------------------(tf2_msgs/TFMessage)-------------Transformations between coordinates
+  - /gt_odom-------------(nav_msgs/Odometry)-----------------------------------------Ground truth odometry
+  - /imu---------------------(sensor_msgs/Imu)-----------------------------------------------IMU
+  - /nuscenes_lidar-----(sensor_msgs/PointCloud2)---------------------------------Lidar pointcloud
+  - /radar_odometry---(nav_msgs/Odometry)----------------------------------------Odometry calculated by radar
+  - /tf-------------------------(tf2_msgs/TFMessage)----------------------------------------Transformations between coordinates
 
 **/radar_odometry** is the **local measurement** which have accumulated error
 **/gps** is the **global measurement** which only provides x, y position
 **/gt_odom** is the ground truth, can only be used to verify your result
 
 ### Package
-Please download the data from the [**link**](https://drive.google.com/drive/folders/1_Z6AUrWdgF_LvK_2a47P-OtPwOcWkYTv).
 The directory structure in container should be as follow : 
 ```
 ~/catkin_ws
@@ -70,4 +89,5 @@ The directory structure in container should be as follow :
 * ROS pose msg structure : http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Pose.html
 
 
-
+### Reference
+* Homework from SDC course : https://hackmd.io/nuJhNv6zRwyQtmiMOFP1Ww
